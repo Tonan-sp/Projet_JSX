@@ -182,3 +182,45 @@
     border-right-color: var(--border);
   }
 }
+
+.movie-page {
+  width: 100%;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+.movie-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+  text-align: left;
+}
+
+.movie-card {
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg);
+  box-shadow: var(--shadow);
+}
+
+.movie-card__poster {
+  display: block;
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  background: var(--code-bg);
+}
+
+.movie-card__content {
+  padding: 16px;
+}
+
+.movie-card__content h2 {
+  margin-bottom: 4px;
+}
+
+.movie-card__year {
+  margin-bottom: 12px;
+  color: var(--text);
+}

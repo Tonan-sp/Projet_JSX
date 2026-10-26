@@ -1,13 +1,19 @@
 import './App.css'
-import './movies.js'
+import { movies } from './movies.js'
+import MovieCard from './MovieCard.jsx'
 
 function App() {
   return (
-    <div>
-      <h1>Le film préféré de Yann : FNAF2 </h1>
-    </div>
+    <main className="movie-page">
+      <h1>Films à découvrir</h1>
+      <section className="movie-grid" aria-label="Liste des films">
+        {movies.map((movie) => (
+          <MovieCard key={movie.id} {...movie} />
+        ))}
+      </section>
+    </main>
   )
 }
 
-export default App
 
+export default App
