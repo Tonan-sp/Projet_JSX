@@ -1,0 +1,22 @@
+# Variables d'environnement (clés API, etc.)
+.env
+.env.*
+!.env.example
+
+# Dépendances
+node_modules/
+
+# Build
+dist/
+build/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Éditeur / OS
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db
