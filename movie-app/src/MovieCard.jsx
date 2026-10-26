@@ -1,4 +1,6 @@
-function MovieCard({ title, year, posterUrl, description }) {
+import RatingBadge from './RatingBadge.jsx'
+
+function MovieCard({ title, year, rating, posterUrl, description }) {
   return (
     <article className="movie-card">
       <img
@@ -9,6 +11,7 @@ function MovieCard({ title, year, posterUrl, description }) {
       <div className="movie-card__content">
         <h2>{title}</h2>
         <p className="movie-card__year">{year}</p>
+        <RatingBadge rating={rating} />
         <p>{description}</p>
       </div>
     </article>

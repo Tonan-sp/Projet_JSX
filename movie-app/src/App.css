@@ -224,3 +224,24 @@
   margin-bottom: 12px;
   color: var(--text);
 }
+
+.badge {
+  display: inline-block;
+  margin-bottom: 12px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--code-bg);
+  color: var(--text-h);
+  font-size: 0.85em;
+  line-height: 1.5;
+}
+
+.badge--good {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.badge--bad {
+  background: #fee2e2;
+  color: #991b1b;
+}
