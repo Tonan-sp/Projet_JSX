@@ -1,20 +1,49 @@
 import './App.css'
-import { movies as initialMovies } from './movies.js'
 import AddMovieForm from './AddMovieForm.jsx'
 import MovieList from './MovieList.jsx'
 import Panel from './Panel.jsx'
 import SearchBar from './SearchBar.jsx'
-import { useState } from "react";
+import { getJSON } from './api.js'
+import { useEffect, useState } from 'react'
 
 
 function App() {
-  const [movies, setMovies] = useState(initialMovies)
+  const [movies, setMovies] = useState([])
   const [likedIds, setLikedIds] = useState([])
   const [query, setQuery] = useState('')
+  const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState('')
   const normalizedQuery = query.trim().toLowerCase()
   const filteredMovies = movies.filter((movie) =>
     movie.title.toLowerCase().includes(normalizedQuery),
   )
+
+  useEffect(() => {
+    const controller = new AbortController()
+
+    async function loadMovies() {
+      try {
+        const data = await getJSON('/api/movies', { signal: controller.signal })
+
+        if (!Array.isArray(data)) {
+          throw new Error('La réponse de l’API doit être une liste de films.')
+        }
+
+        setMovies(data)
+      } catch (loadError) {
+        if (!controller.signal.aborted) {
+          setError(loadError.message)
+        }
+      } finally {
+        if (!controller.signal.aborted) {
+          setIsLoading(false)
+        }
+      }
+    }
+
+    loadMovies()
+    return () => controller.abort()
+  }, [])
 
   function toggleLike(movieId) {
     setLikedIds((currentLikedIds) =>
@@ -37,12 +66,20 @@ function App() {
           value={query}
           onChange={(event) => setQuery(event.target.value)}
         />
-        <MovieList
-          movies={filteredMovies}
-          likedIds={likedIds}
-          onToggleLike={toggleLike}
-          searchQuery={query.trim()}
-        />
+        {isLoading ? (
+          <p role="status">Chargement des films…</p>
+        ) : error ? (
+          <p role="alert">Erreur lors du chargement des films : {error}</p>
+        ) : movies.length === 0 ? (
+          <p role="status">Aucun film dans le catalogue.</p>
+        ) : (
+          <MovieList
+            movies={filteredMovies}
+            likedIds={likedIds}
+            onToggleLike={toggleLike}
+            searchQuery={query.trim()}
+          />
+        )}
       </Panel>
     </main>
   )
