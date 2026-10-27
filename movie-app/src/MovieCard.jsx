@@ -1,6 +1,14 @@
 import RatingBadge from './RatingBadge.jsx'
 
-function MovieCard({ title, year, rating, posterUrl, description }) {
+function MovieCard({
+  title,
+  year,
+  rating,
+  posterUrl,
+  description,
+  isLiked,
+  onToggleLike,
+}) {
   return (
     <article className="movie-card">
       <img
@@ -9,7 +17,18 @@ function MovieCard({ title, year, rating, posterUrl, description }) {
         alt={`Affiche du film « ${title} »`}
       />
       <div className="movie-card__content">
-        <h2>{title}</h2>
+        <div className="movie-card__heading">
+          <h2>{title}</h2>
+          <button
+            className={`movie-card__like-button${isLiked ? ' movie-card__like-button--liked' : ''}`}
+            type="button"
+            aria-label={isLiked ? `Retirer « ${title} » des favoris` : `Ajouter « ${title} » aux favoris`}
+            aria-pressed={isLiked}
+            onClick={onToggleLike}
+          >
+            ♥
+          </button>
+        </div>
         <p className="movie-card__year">{year}</p>
         <RatingBadge rating={rating} />
         <p>{description}</p>

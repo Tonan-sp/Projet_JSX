@@ -196,6 +196,11 @@
   text-align: left;
 }
 
+.movie-list__liked-count {
+  margin-bottom: 16px;
+  text-align: left;
+}
+
 .movie-card {
   overflow: hidden;
   border: 1px solid var(--border);
@@ -214,6 +219,28 @@
 
 .movie-card__content {
   padding: 16px;
+}
+
+.movie-card__heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.movie-card__like-button {
+  flex: 0 0 auto;
+  padding: 0 4px;
+  border: 0;
+  background: transparent;
+  color: #9ca3af;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.movie-card__like-button--liked {
+  color: #dc2626;
 }
 
 .movie-card__content h2 {
