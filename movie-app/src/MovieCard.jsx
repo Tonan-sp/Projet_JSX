@@ -11,11 +11,13 @@ function MovieCard({
 }) {
   return (
     <article className="movie-card">
-      <img
-        className="movie-card__poster"
-        src={posterUrl}
-        alt={`Affiche du film « ${title} »`}
-      />
+      {posterUrl && (
+        <img
+          className="movie-card__poster"
+          src={posterUrl}
+          alt={`Affiche du film « ${title} »`}
+        />
+      )}
       <div className="movie-card__content">
         <div className="movie-card__heading">
           <h2>{title}</h2>
@@ -29,9 +31,9 @@ function MovieCard({
             ♥
           </button>
         </div>
-        <p className="movie-card__year">{year}</p>
+        {year && <p className="movie-card__year">{year}</p>}
         <RatingBadge rating={rating} />
-        <p>{description}</p>
+        {description && <p>{description}</p>}
       </div>
     </article>
   )
